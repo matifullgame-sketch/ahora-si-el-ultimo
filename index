@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petrizzio Sustentable | Premium RVM</title>
+    <style>
+        /* Base y Layout */
+        body { background-color: #eef2f5; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Segoe UI', Roboto, sans-serif; }
+        
+        .totem-frame { 
+            width: 400px; height: 720px; background: #1a1a1a; border-radius: 40px; 
+            padding: 15px; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .screen { 
+            background: #ffffff; width: 100%; height: 100%; border-radius: 25px; 
+            overflow: hidden; display: flex; flex-direction: column;
+        }
+
+        /* Header */
+        .header { padding: 25px; background: #000; color: #fff; text-align: center; font-weight: 800; letter-spacing: 2px; font-size: 14px; }
+
+        /* Contenido Dinámico */
+        .content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* Botones Premium */
+        .btn-main { background: #000; color: #fff; border: none; padding: 18px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 15px; }
+        .btn-main:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-option { background: #fff; border: 1px solid #333; padding: 12px; border-radius: 12px; cursor: pointer; width: 100%; margin: 5px 0; font-weight: 500; transition: 0.2s; }
+        .btn-option:hover { background: #f0f0f0; }
+
+        /* Componentes */
+        .total-badge { background: #f4f0fa; border: 1px solid #7d6bb3; padding: 15px; border-radius: 15px; text-align: center; font-weight: bold; color: #5c4d8c; margin: 20px 0; width: 100%; }
+        .reward-section { width: 100%; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="totem-frame">
+    <div class="screen" id="app-screen">
+        <div id="screen-welcome" class="content">
+            <h1 style="font-size: 24px; text-transform: uppercase;">Revierte el Ciclo</h1>
+            <p style="color: #666; text-align: center; margin-bottom: 40px;">Recicla y obtén recompensas exclusivas.</p>
+            <button class="btn-main" onclick="changeScreen('deposit')">INICIAR DEPÓSITO</button>
+        </div>
+
+        <div id="screen-deposit" class="content" style="display: none;">
+            <h3>Escaneando...</h3>
+            <div class="total-badge">Artículos totales: <span id="total-count">0</span></div>
+            <button class="btn-option" onclick="addItem()">+ Agregar artículo</button>
+            <button id="btn-confirmar" class="btn-main" disabled onclick="changeScreen('canje')">FINALIZAR Y CANJEAR</button>
+        </div>
+
+        <div id="screen-canje" class="content" style="display: none; overflow-y: auto;">
+            <h3 style="margin-top:0;">Elige tu Premio</h3>
+            
+            <div id="nivel-1" class="reward-section" style="display:none;">
+                <p style="font-weight:bold; font-size:14px;">Elige tu Refill:</p>
+                <button class="btn-option" onclick="dispense('Refill: Trío')">Maquillaje Trío</button>
+                <button class="btn-option" onclick="dispense('Refill: Polvo')">Polvo Traslúcido</button>
+                <button class="btn-option" onclick="dispense('Refill: Paleta')">Paleta Correctora</button>
+            </div>
+
+            <div id="nivel-2" class="reward-section" style="display:none;">
+                <p style="font-weight:bold; font-size:14px;">Elige un regalo:</p>
+                <button class="btn-option" onclick="dispense('Muestra Gratis')">🎁 Muestra Gratis</button>
+                <button class="btn-option" onclick="dispense('Espejo')">🪞 Espejo de Bolsillo</button>
+            </div>
+
+            <div id="nivel-3" class="reward-section" style="display:none;">
+                <button class="btn-main" style="background:#7d6bb3;" onclick="dispense('Cosmetiquero')">👜 Cosmetiquero Reciclado</button>
+            </div>
+            
+            <button class="btn-option" style="border:none; color:red;" onclick="resetAll()">Cancelar</button>
+        </div>
+
+        <div id="screen-dispensing" class="content" style="display: none;">
+            <h2 id="msg-dispensing">Procesando...</h2>
+        </div>
+    </div>
+</div>
+
+<script>
+    let count = 0;
+
+    function changeScreen(s) {
+        document.querySelectorAll('.content').forEach(el => el.style.display = 'none');
+        document.getElementById('screen-' + s).style.display = 'flex';
+        if(s === 'canje') updateRewards();
+    }
+
+    function addItem() {
+        count++;
+        document.getElementById('total-count').innerText = count;
+        document.getElementById('btn-confirmar').disabled = false;
+    }
+
+    function updateRewards() {
+        document.getElementById('nivel-1').style.display = (count >= 1 && count <= 2) ? 'block' : 'none';
+        document.getElementById('nivel-2').style.display = (count >= 3 && count <= 4) ? 'block' : 'none';
+        document.getElementById('nivel-3').style.display = (count >= 5) ? 'block' : 'none';
+    }
+
+    function dispense(item) {
+        changeScreen('dispensing');
+        document.getElementById('msg-dispensing').innerText = "DISPENSANDO: " + item;
+        setTimeout(resetAll, 3000);
+    }
+
+    function resetAll() {
+        count = 0;
+        document.getElementById('total-count').innerText = "0";
+        document.getElementById('btn-confirmar').disabled = true;
+        changeScreen('welcome');
+    }
+</script>
+</body>
+</html>
