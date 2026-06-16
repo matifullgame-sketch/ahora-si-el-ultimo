@@ -3,149 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petrizzio Sustentable | Premium RVM</title>
+    <title>Tótem de Reciclaje - Petrizzio Eco</title>
     <style>
-        /* Reset y Layout Base */
-        * { box-sizing: border-box; }
-        body { 
-            background-color: #eef2f5; margin: 0; padding: 20px;
-            display: flex; justify-content: center; align-items: center; 
-            min-height: 100vh; font-family: 'Segoe UI', Roboto, sans-serif; 
+        :root {
+            --primary-color: #2c2c2c; /* Tono elegante marca de maquillaje */
+            --accent-color: #d4a373;  /* Tono dorado/maquillaje sutil */
+            --bg-color: #fcf8f5;      /* Fondo suave */
+            --card-bg: #ffffff;
+            --success-color: #a3b18a; /* Verde eco */
         }
-        
-        /* Contenedor del Tótem */
-        .totem-frame { 
-            width: 400px; height: 720px; background: #1a1a1a; 
-            border-radius: 40px; padding: 15px; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .totem-container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .totem-header {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .totem-header h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .totem-header p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: var(--accent-color);
+            font-weight: 300;
+        }
+
+        .totem-body {
+            padding: 30px 25px;
+        }
+
+        .instruction {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #666;
+        }
+
+        /* Simulación de la ranura de escaneo */
+        .scanner-slot {
+            background: #1a1a1a;
+            height: 60px;
+            border-radius: 50px;
             position: relative;
+            margin: 20px 0;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .screen { 
-            background: #ffffff; width: 100%; height: 100%; 
-            border-radius: 25px; overflow: hidden; 
-            display: flex; flex-direction: column;
+        .scanner-laser {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: #ff3366;
+            box-shadow: 0 0 15px #ff3366;
+            animation: scan 2s infinite ease-in-out;
         }
 
-        /* Header de la Pantalla */
-        .header { 
-            padding: 25px; background: #000; color: #fff; 
-            text-align: center; font-weight: 800; 
-            letter-spacing: 2px; font-size: 14px; 
+        @keyframes scan {
+            0% { transform: translateY(-20px); }
+            50% { transform: translateY(20px); }
+            100% { transform: translateY(-20px); }
         }
 
-        /* Contenedores de Pantalla */
-        .content { 
-            padding: 30px; flex-grow: 1; display: flex; 
-            flex-direction: column; align-items: center; 
-            justify-content: center; width: 100%;
+        .scanner-text {
+            color: #fff;
+            font-size: 12px;
+            z-index: 2;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* Estilos de botones */
-        .btn-main { 
-            background: #000; color: #fff; border: none; padding: 18px; 
-            border-radius: 50px; font-weight: 600; cursor: pointer; 
-            width: 100%; transition: 0.3s; margin-top: 15px; 
+        /* Formulario de simulación para el Tótem */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
         }
-        .btn-main:disabled { background: #ccc; cursor: not-allowed; }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .btn-action {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-action:hover {
+            background-color: #444;
+        }
+
+        /* Sección de Recompensas */
+        .rewards-section {
+            display: none;
+            margin-top: 30px;
+            border-top: 2px dashed #e0e0e0;
+            padding-top: 25px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reward-status {
+            background-color: var(--success-color);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .reward-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .reward-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .reward-card:hover {
+            border-color: var(--accent-color);
+            background-color: #fffcf9;
+        }
+
+        .reward-card input[type="radio"] {
+            transform: scale(1.3);
+            accent-color: var(--primary-color);
+        }
+
+        .reward-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .reward-info p {
+            margin: 0;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .btn-claim {
+            background-color: var(--accent-color);
+            margin-top: 20px;
+        }
         
-        .btn-option { 
-            background: #fff; border: 1px solid #333; padding: 12px; 
-            border-radius: 12px; cursor: pointer; width: 100%; 
-            margin: 5px 0; font-weight: 500; transition: 0.2s; 
+        .btn-claim:hover {
+            background-color: #c49263;
         }
-        .btn-option:hover { background: #f0f0f0; }
 
-        /* Elementos UI */
-        .total-badge { 
-            background: #f4f0fa; border: 1px solid #7d6bb3; 
-            padding: 15px; border-radius: 15px; text-align: center; 
-            font-weight: bold; color: #5c4d8c; margin: 20px 0; width: 100%; 
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
 
-<div class="totem-frame">
-    <div class="screen">
-        <div class="header">PETRIZZIO SUSTENTABLE</div>
+<div class="totem-container">
+    <div class="totem-header">
+        <h1>Petrizzio</h1>
+        <p>Eco-Reciclaje Belleza Consciente</p>
+    </div>
 
-        <div id="screen-welcome" class="content">
-            <h1 style="font-size: 24px; text-transform: uppercase;">Revierte el Ciclo</h1>
-            <p style="color: #666; text-align: center; margin-bottom: 40px;">Recicla y obtén recompensas exclusivas.</p>
-            <button class="btn-main" onclick="changeScreen('deposit')">INICIAR DEPÓSITO</button>
+    <div class="totem-body">
+        <p class="instruction">Introduce tus envases vacíos de <b>Maquillaje Trío, Polvo Traslúcido o Paleta Correctora</b> en la apertura inferior.</p>
+        
+        <div class="scanner-slot">
+            <div class="scanner-laser"></div>
+            <div class="scanner-text">Apertura de Escaneo Activa</div>
         </div>
 
-        <div id="screen-deposit" class="content" style="display: none;">
-            <h3>Escaneando...</h3>
-            <div class="total-badge">Artículos totales: <span id="total-count">0</span></div>
-            <button class="btn-option" onclick="addItem()">+ Agregar artículo</button>
-            <button id="btn-confirmar" class="btn-main" disabled onclick="changeScreen('canje')">FINALIZAR Y CANJEAR</button>
+        <div class="input-group">
+            <label for="envasesInput">¿Cuántos envases has introducido?</label>
+            <input type="number" id="envasesInput" min="1" placeholder="Ej. 3">
         </div>
 
-        <div id="screen-canje" class="content" style="display: none;">
-            <h3 style="margin-top:0;">Elige tu Premio</h3>
+        <button class="btn-action" onclick="procesarEscaneo()">Escanear e Identificar</button>
+
+        <div id="rewardsSection" class="rewards-section">
+            <div class="reward-status" id="rewardStatusText">
+                </div>
             
-            <div id="nivel-1" style="display:none; width: 100%;">
-                <p style="font-weight:bold; font-size:14px;">Elige tu Refill:</p>
-                <button class="btn-option" onclick="dispense('Maquillaje Trío')">Maquillaje Trío</button>
-                <button class="btn-option" onclick="dispense('Polvo Traslúcido')">Polvo Traslúcido</button>
-                <button class="btn-option" onclick="dispense('Paleta Correctora')">Paleta Correctora</button>
-            </div>
-
-            <div id="nivel-2" style="display:none; width: 100%;">
-                <p style="font-weight:bold; font-size:14px;">Elige tu premio:</p>
-                <button class="btn-option" onclick="dispense('Muestra Gratis')">🎁 Muestra Gratis</button>
-                <button class="btn-option" onclick="dispense('Espejo de Bolsillo')">🪞 Espejo de Bolsillo</button>
-            </div>
-
-            <div id="nivel-3" style="display:none; width: 100%;">
-                <button class="btn-main" style="background:#7d6bb3;" onclick="dispense('Cosmetiquero')">👜 Canjear Cosmetiquero</button>
-            </div>
+            <p style="font-weight: 600; margin-bottom: 10px;">Selecciona tu recompensa:</p>
             
-            <button class="btn-option" style="border:none; color:red; margin-top:20px;" onclick="resetAll()">Cancelar</button>
-        </div>
-
-        <div id="screen-dispensing" class="content" style="display: none;">
-            <h2 id="msg-dispensing">Procesando...</h2>
+            <form id="rewardForm">
+                <div class="reward-options" id="optionsContainer">
+                    </div>
+                
+                <button type="button" class="btn-action btn-claim" onclick="entregarPremio()">Confirmar Selección</button>
+            </form>
         </div>
     </div>
 </div>
 
 <script>
-    let count = 0;
+    function procesarEscaneo() {
+        const cantidad = parseInt(document.getElementById('envasesInput').value);
+        const rewardsSection = document.getElementById('rewardsSection');
+        const statusText = document.getElementById('rewardStatusText');
+        const optionsContainer = document.getElementById('optionsContainer');
 
-    function changeScreen(s) {
-        document.querySelectorAll('.content').forEach(el => el.style.display = 'none');
-        document.getElementById('screen-' + s).style.display = 'flex';
-        if(s === 'canje') updateRewards();
+        if (isNaN(cantidad) || cantidad <= 0) {
+            alert("Por favor, introduce una cantidad válida de envases.");
+            return;
+        }
+
+        // Mostrar sección de recompensas
+        rewardsSection.style.display = 'block';
+        optionsContainer.innerHTML = ''; // Limpiar opciones anteriores
+
+        // Lógica de rangos solicitada
+        if (cantidad >= 1 && cantidad <= 2) {
+            statusText.innerText = `¡Escaneo Exitoso! Envases detectados: ${cantidad}. Calificas para 1 REFILL GRATIS.`;
+            
+            optionsContainer.innerHTML = `
+                <label class="reward-card">
+                    <input type="radio" name="premio" value="Refill Maquillaje Trío" checked>
+                    <div class="reward-info">
+                        <h4>Refill: Maquillaje Trío</h4>
+                        <p>Lleva la recarga para tu set de sombras favorito.</p>
+                    </div>
+                </label>
+                <label class="reward-card">
+                    <input type="radio" name="premio" value="Refill Polvo Traslúcido">
+                    <div class="reward-info">
+                        <h4>Refill: Polvo Traslúcido</h4>
+                        <p>Elimina el brillo con tu recarga sustentable.</p>
+                    </div>
+                </label>
+                <label class="reward-card">
+                    <input type="radio" name="premio" value="Refill Paleta Correctora">
+                    <div class="reward-info">
+                        <h4>Refill: Paleta Correctora</h4>
+                        <p>Tu recarga para corregir imperfecciones.</p>
+                    </div>
+                </label>
+            `;
+        } 
+        else if (cantidad >= 3 && cantidad <= 4) {
+            statusText.innerText = `¡Escaneo Exitoso! Envases detectados: ${cantidad}. Calificas para un Regalo de la Marca.`;
+            
+            optionsContainer.innerHTML = `
+                <label class="reward-card">
+                    <input type="radio" name="premio" value="Muestra Gratis de Producto Petrizzio" checked>
+                    <div class="reward-info">
+                        <h4>Muestra Gratis</h4>
+                        <p>Una muestra exclusiva de un producto sorpresa Petrizzio.</p>
+                    </div>
+                </label>
+                <label class="reward-card">
+                    <input type="radio" name="premio" value="Espejo de Bolsillo Petrizzio">
+                    <div class="reward-info">
+                        <h4>Espejo de Bolsillo</h4>
+                        <p>Un elegante espejo para llevar a todas partes.</p>
+                    </div>
+                </label>
+            `;
+        } 
+        else if (cantidad >= 5) {
+            statusText.innerText = `¡Excelente compromiso! Envases detectados: ${cantidad}. ¡Premio Máximo!`;
+            
+            optionsContainer.innerHTML = `
+                <label class="reward-card">
+                    <input type="radio" name="premio" value="Cosmetiquero de Tela Reciclada" checked>
+                    <div class="reward-info">
+                        <h4>Cosmetiquero de Tela Reciclada</h4>
+                        <p>Edición especial Petrizzio Eco. Hecho 100% de materiales reciclados.</p>
+                    </div>
+                </label>
+            `;
+        }
+        
+        // Desplazar pantalla suavemente hacia las recompensas
+        rewardsSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function addItem() {
-        count++;
-        document.getElementById('total-count').innerText = count;
-        document.getElementById('btn-confirmar').disabled = false;
-    }
-
-    function updateRewards() {
-        document.getElementById('nivel-1').style.display = (count >= 1 && count <= 2) ? 'block' : 'none';
-        document.getElementById('nivel-2').style.display = (count >= 3 && count <= 4) ? 'block' : 'none';
-        document.getElementById('nivel-3').style.display = (count >= 5) ? 'block' : 'none';
-    }
-
-    function dispense(item) {
-        document.getElementById('screen-canje').style.display = 'none';
-        document.getElementById('screen-dispensing').style.display = 'flex';
-        document.getElementById('msg-dispensing').innerText = "DISPENSANDO: " + item;
-        setTimeout(resetAll, 3000);
-    }
-
-    function resetAll() {
-        count = 0;
-        document.getElementById('total-count').innerText = "0";
-        document.getElementById('btn-confirmar').disabled = true;
-        changeScreen('welcome');
+    function entregarPremio() {
+        const seleccion = document.querySelector('input[name="premio"]:checked');
+        if (seleccion) {
+            alert(`¡Gracias por reciclar con Petrizzio!\n\nDispensando tu recompensa: \n👉 ${seleccion.value}\n\nPor favor, retírala en la bandeja inferior.`);
+            // Reiniciar interfaz
+            document.getElementById('envasesInput').value = '';
+            document.getElementById('rewardsSection').style.display = 'none';
+        } else {
+            alert("Por favor, selecciona una opción antes de continuar.");
+        }
     }
 </script>
+
 </body>
 </html>
